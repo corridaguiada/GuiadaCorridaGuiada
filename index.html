@@ -791,6 +791,31 @@ tr:hover {
   .chart-card{ grid-column: 1 / -1; }
 }
 
+
+/* subtle run emoji marking ran on rest or strength day */
+.run-emoji{
+  position:absolute;
+  left:8px;
+  bottom:6px;
+  font-size:1.1rem;
+  opacity:.9;
+  pointer-events:none;
+}
+
+
+/* Torna o botão "Editar Nome" sutil quando já há nome salvo */
+.dashboard.has-name .btn.btn-secondary{
+  background: transparent;
+  color: #999;
+  box-shadow: none;
+  opacity: 0.18;
+  border: 1px dashed transparent;
+}
+.dashboard.has-name .btn.btn-secondary:hover{
+  opacity: 0.35;
+  color: #666;
+}
+
 </style>
 </head>
 <body>
@@ -1368,14 +1393,19 @@ let currentWeek = 1; // Para rastrear a semana atual
 document.addEventListener('DOMContentLoaded', function() {
     loadUserData();
     loadWorkoutData();
+    load3kTest();
     generateTables();
     calculateZones();
+    try{ save3kTest(); }catch(e){}
     updateDashboard();
     
     var minInput = document.getElementById('minutes');
     var secInput = document.getElementById('seconds');
     if (minInput) minInput.addEventListener('input', calculateZones);
     if (secInput) secInput.addEventListener('input', calculateZones);
+
+    if (minInput) minInput.addEventListener('input', save3kTest);
+    if (secInput) secInput.addEventListener('input', save3kTest);
 });
 
 // === Funções de Dados do Usuário ===
@@ -1419,7 +1449,8 @@ function toggleNameEdit() {
                 saveUserData();
                 nameSpan.textContent = newName;
                 document.getElementById('userAvatar').textContent = newName.charAt(0).toUpperCase();
-            }
+            applyNameUI();
+                }
             nameInput.style.display = 'none';
             nameSpan.style.display = 'inline';
         };
@@ -1487,6 +1518,7 @@ function generateTables() {
         ${getStatusIcon(workoutInfo.status)}
     </span>
     <span class="workout-label" title="${cellData}">${__renderDistanceText(cellData, planId)}</span>
+    ${((/Descanso|Força/i.test(cellData)) && (workoutInfo.distance||0) > 0) ? '<span class="run-emoji">🏃</span>' : ''}
 `;
                     
                     cell.onclick = function() {
@@ -1542,45 +1574,46 @@ function updateDashboard() {
         activePlan ? planNames[activePlan] : 'Nenhum';
     
     // Calcular estatísticas gerais (todos os planos)
-    Object.keys(trainingPlans).forEach(planId => {
-        trainingPlans[planId].forEach(weekData => {
+    const planId = activePlan; if (trainingPlans[planId]) { trainingPlans[planId].forEach(weekData => {
             for (let i = 1; i < weekData.length; i++) {
-                if (weekData[i] !== 'Descanso') {
-                    const day = ['segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado', 'domingo'][i - 1];
-                    const workoutInfo = getWorkoutStatus(planId, weekData[0], day);
-                    
-                    if (workoutInfo.status === 'completed') {
-                        totalDistance += workoutInfo.distance || 0;
-                        totalTimeMinutes += (workoutInfo.hours || 0) * 60 + (workoutInfo.minutes || 0) + (workoutInfo.seconds || 0) / 60;
-                        
-                        // Se for da semana atual do plano ativo
+                const day = ['segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado', 'domingo'][i - 1];
+                const workoutInfo = getWorkoutStatus(planId, weekData[0], day);
+                const cellText = weekData[i];
+
+                // Total de treinos planejados (ignora Descanso)
+                if (cellText && cellText.trim() !== '' && !/Descanso/i.test(cellText)) {
+                    planTotalWorkouts++;
+                }
+
+                if (workoutInfo.status === 'completed') {
+                    const dist = workoutInfo.distance || 0;
+                    const timeMin = (workoutInfo.hours || 0) * 60 + (workoutInfo.minutes || 0) + (workoutInfo.seconds || 0) / 60;
+
+                    const isRest = /Descanso/i.test(cellText);
+                    const isStrength = /Força/i.test(cellText);
+
+                    const includeDistance = (!isRest) || (dist > 0);
+                    const includeTime = (!isStrength && !isRest) || (dist > 0);
+                    const countAsCompleted = (!isStrength && !isRest) || (dist > 0);
+
+                    if (includeDistance) {
+                        totalDistance += dist;
+                        // semana atual do plano ativo
                         if (planId === activePlan && weekData[0] === currentWeek) {
-                            weekDistance += workoutInfo.distance || 0;
+                            weekDistance += dist;
                         }
                     }
-                }
-            }
-        });
-    });
-    
-    // Calcular progresso específico do plano ativo
-    if (activePlan && trainingPlans[activePlan]) {
-        trainingPlans[activePlan].forEach(weekData => {
-            for (let i = 1; i < weekData.length; i++) {
-                if (weekData[i] !== 'Descanso') {
-                    planTotalWorkouts++;
-                    const day = ['segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado', 'domingo'][i - 1];
-                    const workoutInfo = getWorkoutStatus(activePlan, weekData[0], day);
-                    
-                    if (workoutInfo.status === 'completed') {
+                    if (includeTime) {
+                        totalTimeMinutes += timeMin;
+                    }
+                    if (countAsCompleted) {
                         planCompletedWorkouts++;
                     }
                 }
             }
-        });
+            });
     }
-    
-    // Atualizar dashboard
+// Atualizar dashboard
     document.getElementById('totalDistance').textContent = `${totalDistance.toFixed(1)} km`;
     document.getElementById('weekDistance').textContent = `${weekDistance.toFixed(1)} km`;
     
@@ -1621,30 +1654,6 @@ function openWorkoutModal(planId, week, day, workout) {
     document.getElementById('workoutTimeSeconds').value = workoutInfo.seconds || '0';
     document.getElementById('workoutNotes').value = workoutInfo.notes || '';
 
-    // If it's a Rest day, lock distance/time inputs to zero
-    const isRest = (workout === 'Descanso');
-    const distEl = document.getElementById('workoutDistance');
-    const hEl = document.getElementById('workoutTimeHours');
-    const mEl = document.getElementById('workoutTimeMinutes');
-    const sEl = document.getElementById('workoutTimeSeconds');
-    
-    if (isRest) {
-        distEl.value = 0;
-        hEl.value = 0;
-        mEl.value = 0;
-        sEl.value = 0;
-        distEl.disabled = true;
-        hEl.disabled = true;
-        mEl.disabled = true;
-        sEl.disabled = true;
-    } else {
-        distEl.disabled = false;
-        hEl.disabled = false;
-        mEl.disabled = false;
-        sEl.disabled = false;
-    }
-
-    
     populateWeekSelect(planId);
     document.getElementById('newDay').value = day;
     
@@ -1705,15 +1714,7 @@ function saveWorkout() {
             statusData.hours = parseInt(document.getElementById('workoutTimeHours').value) || 0;
             statusData.minutes = parseInt(document.getElementById('workoutTimeMinutes').value) || 0;
             statusData.seconds = parseInt(document.getElementById('workoutTimeSeconds').value) || 0;
-        // If it's a Rest day, keep distance/time zero even if user tries otherwise
-        if (currentWorkout && currentWorkout.workout === 'Descanso' && status === 'completed') {
-            statusData.distance = 0;
-            statusData.hours = 0;
-            statusData.minutes = 0;
-            statusData.seconds = 0;
-        }
-
-            statusData.notes = document.getElementById('workoutNotes').value;
+        statusData.notes = document.getElementById('workoutNotes').value;
         }
         
         setWorkoutStatus(currentWorkout.planId, currentWorkout.week, currentWorkout.day, statusData);
@@ -1938,12 +1939,14 @@ function getWeeklyPlannedVsRealized(planId){
       // planned
       planSum += plannedKmForCell(cellText);
 
-      // realized
-      if(cellText !== 'Descanso'){
+      // realized (include Rest if ran)
+      {
         const day = days[i-1];
         const info = getWorkoutStatus(planId, weekNum, day);
         if(info && info.status === 'completed'){
-          realSum += info.distance || 0;
+          if (!/Descanso/i.test(cellText) || (info.distance||0) > 0) {
+            realSum += info.distance || 0;
+          }
         }
       }
     }
@@ -2173,6 +2176,71 @@ function __renderDistanceText(originalText, planId){
   return originalText;
 }
 
+
+// --- Persistência do Teste de 3km ---
+function save3kTest(){
+  try {
+    const m = document.getElementById('minutes');
+    const s = document.getElementById('seconds');
+    localStorage.setItem('rg_test3k_minutes', (m && m.value) ? String(parseInt(m.value||"0",10)) : "0");
+    localStorage.setItem('rg_test3k_seconds', (s && s.value) ? String(parseInt(s.value||"0",10)) : "0");
+  } catch(e){}
+}
+function load3kTest(){
+  try {
+    const m = document.getElementById('minutes');
+    const s = document.getElementById('seconds');
+    const mv = localStorage.getItem('rg_test3k_minutes');
+    const sv = localStorage.getItem('rg_test3k_seconds');
+    if(m && mv !== null){ m.value = mv; }
+    if(s && sv !== null){ s.value = sv; }
+  } catch(e){}
+}
+document.addEventListener('DOMContentLoaded', function(){
+  loadUserData();
+  load3kTest();
+  // Recalcula zonas se houver valores salvos
+  const m = document.getElementById('minutes');
+  const s = document.getElementById('seconds');
+  if ((m && parseInt(m.value||"0")) || (s && parseInt(s.value||"0"))) {
+    calculateZones();
+  }
+  // aplica UI do nome sutil, se houver
+  applyNameUI();
+});
+
+// Insere listeners para salvar ao digitar
+setTimeout(function(){
+  const m = document.getElementById('minutes');
+  const s = document.getElementById('seconds');
+  if(m){ m.addEventListener('input', save3kTest); }
+  if(s){ s.addEventListener('input', save3kTest); }
+}, 0);
+
+// Envolve calculateZones para salvar após calcular
+(function(){
+  const _calc = calculateZones;
+  calculateZones = function(){
+    const res = _calc.apply(this, arguments);
+    save3kTest();
+    return res;
+  }
+})();
+
+// Deixa o botão "Editar Nome" sutil se já houver nome
+function applyNameUI(){
+  try{
+    const dash = document.querySelector('.dashboard');
+    const btn = document.querySelector('.dashboard-header .btn.btn-secondary');
+    if(!dash || !btn) return;
+    if(userData && userData.name && userData.name.trim()!==''){
+      dash.classList.add('has-name');
+      btn.setAttribute('title', 'Editar nome');
+    }else{
+      dash.classList.remove('has-name');
+    }
+  }catch(e){}
+}
 </script>
 </body>
 </html>
