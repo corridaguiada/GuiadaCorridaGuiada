@@ -817,6 +817,260 @@ tr:hover {
 }
 
 </style>
+
+<!-- Styles do bloco Aquecimentos (namespaced tag) -->
+<style id="aq-styles-embed">
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .aquecimentos-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .aquecimentos-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #0057A4, #004182);
+            color: white;
+            border-radius: 12px;
+        }
+
+        .aquecimentos-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .aquecimentos-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .tabs-aquecimento {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .tab-aquecimento {
+            flex: 1;
+            padding: 1rem 2rem;
+            text-align: center;
+            background: white;
+            color: #666;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .tab-aquecimento:last-child {
+            border-right: none;
+        }
+
+        .tab-aquecimento:hover {
+            background: #f8f9fa;
+            color: #0057A4;
+        }
+
+        .tab-aquecimento.active {
+            background: #0057A4;
+            color: white;
+        }
+
+        .content-aquecimento {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .tab-content-aquecimento {
+            display: none;
+        }
+
+        .tab-content-aquecimento.active {
+            display: block;
+        }
+
+        .section-aquecimento {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-aquecimento h2 {
+            color: #0057A4;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #0057A4;
+            padding-bottom: 0.5rem;
+        }
+
+        .exercicio-item {
+            color: #333;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+            cursor: pointer;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #0057A4;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .exercicio-item:hover {
+            background: #e9ecef;
+        }
+
+        .exercicio-item.active {
+            background: #0057A4;
+            color: white;
+        }
+
+        .exercicio-icon {
+            font-size: 1.5rem;
+        }
+
+        .exercicio-video {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .exercicio-video.active {
+            display: block;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* Proporção 16:9 */
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e9ecef, #dee2e6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .video-placeholder .play-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #0057A4;
+        }
+
+        .exercicio-description {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border-left: 4px solid #0057A4;
+        }
+
+        .exercicio-description h4 {
+            color: #0057A4;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .exercicio-description ul {
+            margin-left: 1.5rem;
+        }
+
+        .exercicio-description li {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        .duration-badge {
+            background: #0057A4;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        @media (max-width: 768px) {
+            .aquecimentos-header h1 {
+                font-size: 2rem;
+            }
+
+            .tabs-aquecimento {
+                flex-direction: column;
+            }
+
+            .tab-aquecimento {
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+
+            .tab-aquecimento:last-child {
+                border-bottom: none;
+            }
+
+            .content-aquecimento {
+                padding: 1rem;
+            }
+
+            .exercicio-item {
+                font-size: 1.2rem;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .duration-badge {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+        }
+
+</style>
 </head>
 <body>
 <div class="container">
@@ -2241,6 +2495,387 @@ function applyNameUI(){
     }
   }catch(e){}
 }
+</script>
+
+<!-- ===== Início bloco Aquecimentos (anexado) ===== -->
+<section id="aquecimentos-bloco-anexado">
+<div class="aquecimentos-container">
+        <div class="aquecimentos-header">
+            <h1>Aquecimentos e Alongamentos</h1>
+            <p>Exercícios essenciais para preparar seu corpo antes e depois da corrida</p>
+        </div>
+
+        <!-- Navegação por Abas -->
+        <div class="tabs-aquecimento">
+            <button class="tab-aquecimento active" onclick="aqShowTabAquecimento('dinamicos')">
+                Aquecimentos Dinâmicos (Início)
+            </button>
+            <button class="tab-aquecimento" onclick="aqShowTabAquecimento('estaticos')">
+                Alongamentos Estáticos (Fim)
+            </button>
+        </div>
+
+        <!-- Conteúdo das Abas -->
+        <div class="content-aquecimento">
+            <!-- Aba Aquecimentos Dinâmicos -->
+            <div id="dinamicos" class="tab-content-aquecimento active">
+                <div class="section-aquecimento">
+                    <h2>Aquecimentos Dinâmicos - Antes da Corrida</h2>
+                    <p style="margin-bottom: 2rem; color: #666; font-size: 1.1rem;">
+                        Realize estes exercícios por 5-10 minutos antes de começar a correr. Os movimentos dinâmicos preparam músculos e articulações para o esforço.
+                    </p>
+                    
+                    <!-- Exercício 1 -->
+                    <div class="exercicio-item" onclick="aqToggleExercicio('dinamico1')">
+                        <span class="exercicio-icon">🦵</span>
+                        <span>Elevação de Joelhos (High Knees)</span>
+                        <span class="duration-badge">30s</span>
+                    </div>
+                    <div id="dinamico1" class="exercicio-video">
+                        <div class="video-container">
+                            <div class="video-placeholder">
+                                <div class="play-icon">▶</div>
+                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+                            </div>
+                            <!-- Substitua pela URL do seu vídeo:-->
+                            <iframe src="https://www.youtube.com/watch?v=Zpb3CliVxw4" frameborder="0" allowfullscreen></iframe>
+                            
+                        </div>
+                        <div class="exercicio-description">
+                            <h4>Como executar:</h4>
+                            <ul>
+                                <li>Mantenha o corpo ereto e olhar para frente</li>
+                                <li>Eleve alternadamente os joelhos até a altura do quadril</li>
+                                <li>Mantenha um ritmo constante e controlado</li>
+                                <li>Use os braços para manter o equilíbrio</li>
+                                <li>Execute por 30 segundos</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 2 -->
+                    <div class="exercicio-item" onclick="aqToggleExercicio('dinamico2')">
+                        <span class="exercicio-icon">🍑</span>
+                        <span>Calcanhares ao Glúteo (Butt Kicks)</span>
+                        <span class="duration-badge">30s</span>
+                    </div>
+                    <div id="dinamico2" class="exercicio-video">
+                        <div class="video-container">
+                            <div class="video-placeholder">
+                                <div class="play-icon">▶</div>
+                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+                            </div>
+                        </div>
+                        <div class="exercicio-description">
+                            <h4>Como executar:</h4>
+                            <ul>
+                                <li>Mantenha o corpo ereto com abdômen contraído</li>
+                                <li>Flexione alternadamente os joelhos, levando o calcanhar ao glúteo</li>
+                                <li>Mantenha as coxas paralelas ao chão</li>
+                                <li>Execute com ritmo constante</li>
+                                <li>Continue por 30 segundos</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 3 -->
+                    <div class="exercicio-item" onclick="aqToggleExercicio('dinamico3')">
+                        <span class="exercicio-icon">🔄</span>
+                        <span>Rotações de Quadril</span>
+                        <span class="duration-badge">10x cada lado</span>
+                    </div>
+                    <div id="dinamico3" class="exercicio-video">
+                        <div class="video-container">
+                            <div class="video-placeholder">
+                                <div class="play-icon">▶</div>
+                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+                            </div>
+                        </div>
+                        <div class="exercicio-description">
+                            <h4>Como executar:</h4>
+                            <ul>
+                                <li>Apoie-se em uma parede ou objeto fixo</li>
+                                <li>Eleve uma perna e faça círculos amplos com o quadril</li>
+                                <li>Execute 10 rotações para frente e 10 para trás</li>
+                                <li>Repita com a outra perna</li>
+                                <li>Mantenha o movimento controlado e fluido</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 4 -->
+                    <div class="exercicio-item" onclick="aqToggleExercicio('dinamico4')">
+                        <span class="exercicio-icon">🕺</span>
+                        <span>Passadas Laterais (Lateral Lunges)</span>
+                        <span class="duration-badge">10x cada lado</span>
+                    </div>
+                    <div id="dinamico4" class="exercicio-video">
+                        <div class="video-container">
+                            <div class="video-placeholder">
+                                <div class="play-icon">▶</div>
+                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+                            </div>
+                        </div>
+                        <div class="exercicio-description">
+                            <h4>Como executar:</h4>
+                            <ul>
+                                <li>Comece em posição ereta, pés paralelos</li>
+                                <li>Dê um passo largo para o lado, flexionando o joelho</li>
+                                <li>Mantenha a outra perna estendida</li>
+                                <li>Retorne à posição inicial e repita do outro lado</li>
+                                <li>Execute 10 repetições para cada lado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aba Alongamentos Estáticos -->
+            <div id="estaticos" class="tab-content-aquecimento">
+                <div class="section-aquecimento">
+                    <h2>Alongamentos Estáticos - Após a Corrida</h2>
+                    <p style="margin-bottom: 2rem; color: #666; font-size: 1.1rem;">
+                        Execute estes alongamentos por 10-15 minutos após a corrida. Mantenha cada posição por 20-30 segundos para melhor recuperação.
+                    </p>
+                    
+                    <!-- Exercício 1 -->
+                    <div class="exercicio-item" onclick="aqToggleExercicio('estatico1')">
+                        <span class="exercicio-icon">🦵</span>
+                        <span>Alongamento de Quadríceps</span>
+                        <span class="duration-badge">30s cada</span>
+                    </div>
+                    <div id="estatico1" class="exercicio-video">
+                        <div class="video-container">
+                            <div class="video-placeholder">
+                                <div class="play-icon">▶</div>
+                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+                            </div>
+                        </div>
+                        <div class="exercicio-description">
+                            <h4>Como executar:</h4>
+                            <ul>
+                                <li>Fique em pé e apoie-se em uma parede se necessário</li>
+                                <li>Flexione uma perna para trás, segurando o pé com a mão</li>
+                                <li>Puxe o calcanhar em direção ao glúteo</li>
+                                <li>Mantenha os joelhos alinhados</li>
+                                <li>Segure por 30 segundos e repita do outro lado</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 2 -->
+                    <div class="exercicio-item" onclick="aqToggleExercicio('estatico2')">
+                        <span class="exercicio-icon">🦎</span>
+                        <span>Alongamento de Isquiotibiais</span>
+                        <span class="duration-badge">30s cada</span>
+                    </div>
+                    <div id="estatico2" class="exercicio-video">
+                        <div class="video-container">
+                            <div class="video-placeholder">
+                                <div class="play-icon">▶</div>
+                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+                            </div>
+                        </div>
+                        <div class="exercicio-description">
+                            <h4>Como executar:</h4>
+                            <ul>
+                                <li>Sente-se no chão com uma perna estendida</li>
+                                <li>Flexione a outra perna, apoiando o pé na coxa estendida</li>
+                                <li>Incline-se para frente sobre a perna estendida</li>
+                                <li>Mantenha as costas retas durante o alongamento</li>
+                                <li>Segure por 30 segundos e troque de lado</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 3 -->
+                    <div class="exercicio-item" onclick="aqToggleExercicio('estatico3')">
+                        <span class="exercicio-icon">🧘‍♀️</span>
+                        <span>Alongamento de Panturrilha</span>
+                        <span class="duration-badge">30s cada</span>
+                    </div>
+                    <div id="estatico3" class="exercicio-video">
+                        <div class="video-container">
+                            <div class="video-placeholder">
+                                <div class="play-icon">▶</div>
+                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+                            </div>
+                        </div>
+                        <div class="exercicio-description">
+                            <h4>Como executar:</h4>
+                            <ul>
+                                <li>Apoie as mãos em uma parede</li>
+                                <li>Coloque um pé atrás, mantendo-o totalmente apoiado no chão</li>
+                                <li>Mantenha a perna de trás estendida</li>
+                                <li>Incline-se para frente até sentir o alongamento</li>
+                                <li>Segure por 30 segundos e repita com a outra perna</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 4 -->
+                    <div class="exercicio-item" onclick="aqToggleExercicio('estatico4')">
+                        <span class="exercicio-icon">🍑</span>
+                        <span>Alongamento de Glúteos</span>
+                        <span class="duration-badge">30s cada</span>
+                    </div>
+                    <div id="estatico4" class="exercicio-video">
+                        <div class="video-container">
+                            <div class="video-placeholder">
+                                <div class="play-icon">▶</div>
+                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+                            </div>
+                        </div>
+                        <div class="exercicio-description">
+                            <h4>Como executar:</h4>
+                            <ul>
+                                <li>Deite-se de costas com os joelhos flexionados</li>
+                                <li>Coloque o tornozelo de uma perna sobre o joelho da outra</li>
+                                <li>Puxe a coxa da perna de baixo em direção ao peito</li>
+                                <li>Mantenha a cabeça e ombros relaxados no chão</li>
+                                <li>Segure por 30 segundos e troque de lado</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 5 -->
+                    <div class="exercicio-item" onclick="aqToggleExercicio('estatico5')">
+                        <span class="exercicio-icon">🧘‍♂️</span>
+                        <span>Alongamento de Flexores do Quadril</span>
+                        <span class="duration-badge">30s cada</span>
+                    </div>
+                    <div id="estatico5" class="exercicio-video">
+                        <div class="video-container">
+                            <div class="video-placeholder">
+                                <div class="play-icon">▶</div>
+                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+                            </div>
+                        </div>
+                        <div class="exercicio-description">
+                            <h4>Como executar:</h4>
+                            <ul>
+                                <li>Ajoelhe-se com um pé à frente em posição de estocada</li>
+                                <li>Mantenha o joelho da frente alinhado com o tornozelo</li>
+                                <li>Empurre o quadril para frente suavemente</li>
+                                <li>Mantenha o tronco ereto durante o movimento</li>
+                                <li>Segure por 30 segundos e troque de lado</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para alternar entre as abas de aquecimento
+        function aqShowTabAquecimento(tabName) {
+            // Remove active de todas as abas e conteúdos
+            const tabs = document.querySelectorAll('.tab-aquecimento');
+            const tabContents = document.querySelectorAll('.tab-content-aquecimento');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Adiciona active na aba clicada e seu conteúdo
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Função para expandir/recolher exercícios
+        function aqToggleExercicio(id) {
+            const element = document.getElementById(id);
+            const header = event.target.closest('.exercicio-item');
+            
+            if (element.classList.contains('active')) {
+                element.classList.remove('active');
+                header.classList.remove('active');
+            } else {
+                // Fecha todos os outros exercícios da mesma aba
+                const currentTab = header.closest('.tab-content-aquecimento');
+                const allVideos = currentTab.querySelectorAll('.exercicio-video');
+                const allHeaders = currentTab.querySelectorAll('.exercicio-item');
+                
+                allVideos.forEach(video => video.classList.remove('active'));
+                allHeaders.forEach(h => h.classList.remove('active'));
+                
+                // Abre o exercício clicado
+                element.classList.add('active');
+                header.classList.add('active');
+            }
+        }
+
+        // Função para substituir placeholder por vídeo real
+        function loadVideo(exercicioId, videoUrl) {
+            const videoContainer = document.querySelector(`#${exercicioId} .video-container`);
+            const videoId = videoUrl.includes('youtube.com') ? 
+                videoUrl.split('v=')[1]?.split('&')[0] : 
+                videoUrl.split('youtu.be/')[1]?.split('?')[0];
+            
+            if (videoId) {
+                videoContainer.innerHTML = `
+                    <iframe src="https://www.youtube.com/embed/${videoId}" 
+                            frameborder="0" 
+                            allowfullscreen>
+                    </iframe>
+                `;
+            }
+        }
+
+        // Exemplo de como carregar um vídeo:
+        // loadVideo('dinamico1', 'https://www.youtube.com/watch?v=SEU_VIDEO_ID');
+    </script>
+</section>
+<!-- ===== Fim bloco Aquecimentos (anexado) ===== -->
+
+
+<!-- Script do bloco Aquecimentos (namespaced funções) -->
+<script id="aq-script-embed">
+(function(){
+  "use strict";
+  // Alterna as abas Dinâmicos/Estáticos dentro do bloco anexado
+  window.aqShowTabAquecimento = function(id){
+    var root = document.getElementById("aquecimentos-bloco-anexado");
+    if(!root) return;
+    var tabs = root.querySelectorAll(".tab-aquecimento");
+    var panes = root.querySelectorAll(".tab-content-aquecimento");
+    tabs.forEach(function(t){
+      if(t.textContent.includes("Dinâmicos") && id==="dinamicos"){ t.classList.add("active"); }
+      else if(t.textContent.includes("Estáticos") && id==="estaticos"){ t.classList.add("active"); }
+      else { t.classList.remove("active"); }
+    });
+    panes.forEach(function(p){
+      if(p.id === id){ p.classList.add("active"); }
+      else { p.classList.remove("active"); }
+    });
+  };
+
+  // Abre/fecha um exercício específico dentro do bloco anexado
+  window.aqToggleExercicio = function(id){
+    var root = document.getElementById("aquecimentos-bloco-anexado");
+    if(!root) return;
+    var panel = root.querySelector("#" + CSS.escape(id));
+    if(!panel) return;
+    var item = panel.previousElementSibling;
+    var isActive = panel.classList.contains("active");
+    // Fecha todos antes de abrir o clicado (comportamento similar ao restante do app)
+    root.querySelectorAll(".exercicio-video.active").forEach(function(el){ el.classList.remove("active"); });
+    root.querySelectorAll(".exercicio-item.active").forEach(function(el){ el.classList.remove("active"); });
+    if(!isActive){
+      panel.classList.add("active");
+      if(item && item.classList) item.classList.add("active");
+    }
+  };
+})();
 </script>
 </body>
 </html>
