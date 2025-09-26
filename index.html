@@ -1112,6 +1112,42 @@ tr:hover {
 }
 
 </style>
+
+<style id="fix-videos-only">
+/* === Correções solicitadas (mínimas) === */
+/* Remove bordas pretas e mantém 16:9, ocupando o container sem sobras */
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto 1rem;
+  background: transparent !important; /* sem fundo preto */
+  border-radius: 12px;
+  overflow: hidden;
+}
+.video-container::before {
+  content: "";
+  display: block;
+  padding-top: 56.25%; /* 16:9 */
+}
+.video-container > video, .video-container > iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover !important; /* preenche sem barras pretas */
+  background: transparent !important;
+}
+
+/* Garantir que textos de títulos e badges não "fujam" para as laterais */
+.exercicio-item, .section h3, .exercicio-description, .duration-badge {
+  position: relative;
+}
+
+/* Oculta qualquer container de vídeo vazio (bloco preto sem mídia) */
+.video-container:has(> :not(video):not(iframe)) {
+  display: none;
+}
+</style>
+
 </head>
 <body>
 <div class="container">
@@ -3011,5 +3047,30 @@ function applyNameUI(){
   };
 })();
 </script>
+
+<script id="toggle-video-fix">
+// Reativa toggle: clicar no título/linha do exercício alterna o vídeo abaixo
+(function(){
+  function bindToggles(){
+    document.querySelectorAll('.exercicio-item, .section h3').forEach(function(el){
+      el.addEventListener('click', function(){
+        el.classList.toggle('active');
+        var pane = el.nextElementSibling;
+        if (pane && pane.classList.contains('exercicio-video')){
+          pane.classList.toggle('active');
+        } else if (pane && pane.classList.contains('expandable')){
+          pane.classList.toggle('active');
+        }
+      });
+    });
+  }
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', bindToggles);
+  } else {
+    bindToggles();
+  }
+})();
+</script>
+
 </body>
 </html>
