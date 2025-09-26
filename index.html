@@ -817,7 +817,6 @@ tr:hover {
 }
 
 </style>
-
 <!-- Styles do bloco Aquecimentos (namespaced tag) -->
 <style id="aq-styles-embed">
 * {
@@ -2496,309 +2495,205 @@ function applyNameUI(){
   }catch(e){}
 }
 </script>
-
 <!-- ===== Início bloco Aquecimentos (anexado) ===== -->
 <section id="aquecimentos-bloco-anexado">
 <div class="aquecimentos-container">
-        <div class="aquecimentos-header">
-            <h1>Aquecimentos e Alongamentos</h1>
-            <p>Exercícios essenciais para preparar seu corpo antes e depois da corrida</p>
-        </div>
-
-        <!-- Navegação por Abas -->
-        <div class="tabs-aquecimento">
-            <button class="tab-aquecimento active" onclick="aqShowTabAquecimento('dinamicos')">
+<div class="aquecimentos-header">
+<h1>Aquecimentos e Alongamentos</h1>
+<p>Exercícios essenciais para preparar seu corpo antes e depois da corrida</p>
+</div>
+<!-- Navegação por Abas -->
+<div class="tabs-aquecimento">
+<button class="tab-aquecimento active" onclick="aqShowTabAquecimento('dinamicos')">
                 Aquecimentos Dinâmicos (Início)
             </button>
-            <button class="tab-aquecimento" onclick="aqShowTabAquecimento('estaticos')">
+<button class="tab-aquecimento" onclick="aqShowTabAquecimento('estaticos')">
                 Alongamentos Estáticos (Fim)
             </button>
-        </div>
-
-        <!-- Conteúdo das Abas -->
-        <div class="content-aquecimento">
-            <!-- Aba Aquecimentos Dinâmicos -->
-            <div id="dinamicos" class="tab-content-aquecimento active">
-                <div class="section-aquecimento">
-                    <h2>Aquecimentos Dinâmicos - Antes da Corrida</h2>
-                    <p style="margin-bottom: 2rem; color: #666; font-size: 1.1rem;">
+</div>
+<!-- Conteúdo das Abas -->
+<div class="content-aquecimento">
+<!-- Aba Aquecimentos Dinâmicos -->
+<div class="tab-content-aquecimento active" id="dinamicos">
+<div class="section-aquecimento">
+<h2>Aquecimentos Dinâmicos - Antes da Corrida</h2>
+<p style="margin-bottom: 2rem; color: #666; font-size: 1.1rem;">
                         Realize estes exercícios por 5-10 minutos antes de começar a correr. Os movimentos dinâmicos preparam músculos e articulações para o esforço.
                     </p>
-                    
-                    <!-- Exercício 1 -->
-                    <div class="exercicio-item" onclick="aqToggleExercicio('dinamico1')">
-                        <span class="exercicio-icon">🦵</span>
-                        <span>Chute Frontal</span>
-                        <span class="duration-badge">10x cada perna</span>
-                    </div>
-
-                    <div id="aquecimento1" class="exercicio-video active">
-                        <div class="video-container">
-                          <video controls preload="metadata" playsinline aria-label="Aquecimento 1">
-                            <source src="aquecimento/Aquecimento1.mp4" type="video/mp4" />
-                            Seu navegador não suporta vídeo HTML5.
-                          </video>
-                        </div>
-                      </div>
-                      
-                        <div class="exercicio-description">
-                            <h4>Como executar:</h4>
-                            <ul>
-                                <li>Mantenha o corpo ereto e olhar para frente</li>
-                                <li>Eleve a perna reta até a altura do quadril</li>
-                                <li>Toque sua mão oposta na ponta do pé ou chegue o mais proximo que der</li>
-                                <li>Se precisar use os braços para manter o equilíbrio</li>
-                                <li>Execute 10 repetições para cada perna</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Exercício 2 -->
-                    <div class="exercicio-item" onclick="aqToggleExercicio('dinamico2')">
-                        <span class="exercicio-icon">🦵</span>
-                        <span>Chute Lateral</span>
-                        <span class="duration-badge">10x cada perna</span>
-                    </div>
-                    <div id="dinamico2" class="exercicio-video">
-                        <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
-                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
-                            </div>
-                        </div>
-                        <div class="exercicio-description">
-                            <h4>Como executar:</h4>
-                            <ul>
-                                <li>Mantenha o corpo ereto e olhar para frente</li>
-                                <li>Com a perna reta, realize o movimento onde uma das pernas vai ao maximo para direita e volta indo ao maximo para esquerda</li>
-                                <li>Se precisar use os braços para se apoiar</li>
-                                <li>Execute com ritmo constante</li>
-                                <li>Execute 10 repetições para cada perna</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Exercício 3 -->
-                    <div class="exercicio-item" onclick="aqToggleExercicio('dinamico3')">
-                        <span class="exercicio-icon">🔄</span>
-                        <span>Agachamento Rotacional</span>
-                        <span class="duration-badge">10x cada lado</span>
-                    </div>
-                    <div id="dinamico3" class="exercicio-video">
-                        <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
-                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
-                            </div>
-                        </div>
-                        <div class="exercicio-description">
-                            <h4>Como executar:</h4>
-                            <ul>
-                                <li>Agache e apoia as mãos em seus pés</li>
-                                <li>Importante fazer força na parte lateral dos pés e não tirar o calcanhar do chão</li>
-                                <li>Execute 10 rotações para cada lado</li>
-                                <li>Mantenha o movimento controlado e fluido</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Exercício 4 -->
-                    <div class="exercicio-item" onclick="aqToggleExercicio('dinamico4')">
-                        <span class="exercicio-icon">🕺</span>
-                        <span>Meio espacate + 10x batida em cada perna </span>
-                        <span class="duration-badge">10x cada lado</span>
-                    </div>
-                    <div id="dinamico4" class="exercicio-video">
-                        <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
-                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
-                            </div>
-                        </div>
-                        <div class="exercicio-description">
-                            <h4>Como executar:</h4>
-                            <ul>
-                                <li>Distancie os pés, formando um meio espacate</li>
-                                <li>Depois, alternando as mãos bata no pé oposto ou próximo</li>
-                                <li>Execute 10 repetições para cada lado</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                                        <!-- Exercício 5 -->
-                                        <div class="exercicio-item" onclick="aqToggleExercicio('dinamico3')">
-                                            <span class="exercicio-icon">🔄</span>
-                                            <span>Passada Frontal</span>
-                                            <span class="duration-badge">10x cada perna</span>
-                                        </div>
-                                        <div id="dinamico3" class="exercicio-video">
-                                            <div class="video-container">
-                                                <div class="video-placeholder">
-                                                    <div class="play-icon">▶</div>
-                                                    <div>Clique aqui para inserir o vídeo do YouTube</div>
-                                                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
-                                                </div>
-                                            </div>
-                                            <div class="exercicio-description">
-                                                <h4>Como executar:</h4>
-                                                <ul>
-                                                    <li>Leve uma perna a frente, e a outra dobre levemente</li>
-                                                    <li>Se incline, e com as mãos paralelas passe o mais proximo que conseguir dos pés a frente</li>
-                                                    <li>Execute 10 vezes para cada perna</li>
-                                                    
-                                                    <li>Mantenha o movimento controlado e fluido</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                </div>
-            </div>
-
-            <!-- Aba Alongamentos Estáticos -->
-            <div id="estaticos" class="tab-content-aquecimento">
-                <div class="section-aquecimento">
-                    <h2>Alongamentos Estáticos - Após a Corrida</h2>
-                    <p style="margin-bottom: 2rem; color: #666; font-size: 1.1rem;">
+<!-- Exercício 1 -->
+<div class="exercicio-item" onclick="aqToggleExercicio('dinamico1')">
+<span class="exercicio-icon">🦵</span>
+<span>Chute Frontal</span>
+<span class="duration-badge">10x cada perna</span>
+</div>
+<div class="exercicio-video" id="dinamico1"><video controls="True" height="auto" width="100%"><source src="aquecimento/Alongamento1.mp4" type="video/mp4"/>Seu navegador não suporta a tag de vídeo.</video></div>
+<!-- Exercício 2 -->
+<div class="exercicio-item" onclick="aqToggleExercicio('dinamico2')">
+<span class="exercicio-icon">🦵</span>
+<span>Chute Lateral</span>
+<span class="duration-badge">10x cada perna</span>
+</div>
+<div class="exercicio-video" id="dinamico2"><video controls="True" height="auto" width="100%"><source src="aquecimento/Alongamento2.mp4" type="video/mp4"/>Seu navegador não suporta a tag de vídeo.</video></div>
+<!-- Exercício 3 -->
+<div class="exercicio-item" onclick="aqToggleExercicio('dinamico3')">
+<span class="exercicio-icon">🔄</span>
+<span>Agachamento Rotacional</span>
+<span class="duration-badge">10x cada lado</span>
+</div>
+<div class="exercicio-video" id="dinamico3"><video controls="True" height="auto" width="100%"><source src="aquecimento/Alongamento3.mp4" type="video/mp4"/>Seu navegador não suporta a tag de vídeo.</video></div>
+<!-- Exercício 4 -->
+<div class="exercicio-item" onclick="aqToggleExercicio('dinamico4')">
+<span class="exercicio-icon">🕺</span>
+<span>Meio espacate + 10x batida em cada perna </span>
+<span class="duration-badge">10x cada lado</span>
+</div>
+<div class="exercicio-video" id="dinamico4"><video controls="True" height="auto" width="100%"><source src="aquecimento/Alongamento4.mp4" type="video/mp4"/>Seu navegador não suporta a tag de vídeo.</video></div>
+<!-- Exercício 5 -->
+<div class="exercicio-item" onclick="aqToggleExercicio('dinamico3')">
+<span class="exercicio-icon">🔄</span>
+<span>Passada Frontal</span>
+<span class="duration-badge">10x cada perna</span>
+</div>
+<div class="exercicio-video" id="dinamico3"><video controls="True" height="auto" width="100%"><source src="aquecimento/Alongamento5.mp4" type="video/mp4"/>Seu navegador não suporta a tag de vídeo.</video></div>
+</div>
+</div>
+<!-- Aba Alongamentos Estáticos -->
+<div class="tab-content-aquecimento" id="estaticos">
+<div class="section-aquecimento">
+<h2>Alongamentos Estáticos - Após a Corrida</h2>
+<p style="margin-bottom: 2rem; color: #666; font-size: 1.1rem;">
                         Execute estes alongamentos por 10-15 minutos após a corrida. Mantenha cada posição por 20-30 segundos para melhor recuperação.
                     </p>
-                    
-                    <!-- Exercício 1 -->
-                    <div class="exercicio-item" onclick="aqToggleExercicio('estatico1')">
-                        <span class="exercicio-icon">🦵</span>
-                        <span>Alongamento de Quadríceps</span>
-                        <span class="duration-badge">30s cada</span>
-                    </div>
-                    <div id="estatico1" class="exercicio-video">
-                        <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
-                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
-                            </div>
-                        </div>
-                        <div class="exercicio-description">
-                            <h4>Como executar:</h4>
-                            <ul>
-                                <li>Fique em pé e apoie-se em uma parede se necessário</li>
-                                <li>Flexione uma perna para trás, segurando o pé com a mão</li>
-                                <li>Puxe o calcanhar em direção ao glúteo</li>
-                                <li>Mantenha os joelhos alinhados</li>
-                                <li>Segure por 30 segundos e repita do outro lado</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Exercício 2 -->
-                    <div class="exercicio-item" onclick="aqToggleExercicio('estatico2')">
-                        <span class="exercicio-icon">🦎</span>
-                        <span>Alongamento de Isquiotibiais</span>
-                        <span class="duration-badge">30s cada</span>
-                    </div>
-                    <div id="estatico2" class="exercicio-video">
-                        <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
-                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
-                            </div>
-                        </div>
-                        <div class="exercicio-description">
-                            <h4>Como executar:</h4>
-                            <ul>
-                                <li>Sente-se no chão com uma perna estendida</li>
-                                <li>Flexione a outra perna, apoiando o pé na coxa estendida</li>
-                                <li>Incline-se para frente sobre a perna estendida</li>
-                                <li>Mantenha as costas retas durante o alongamento</li>
-                                <li>Segure por 30 segundos e troque de lado</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Exercício 3 -->
-                    <div class="exercicio-item" onclick="aqToggleExercicio('estatico3')">
-                        <span class="exercicio-icon">🧘‍♀️</span>
-                        <span>Alongamento de Panturrilha</span>
-                        <span class="duration-badge">30s cada</span>
-                    </div>
-                    <div id="estatico3" class="exercicio-video">
-                        <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
-                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
-                            </div>
-                        </div>
-                        <div class="exercicio-description">
-                            <h4>Como executar:</h4>
-                            <ul>
-                                <li>Apoie as mãos em uma parede</li>
-                                <li>Coloque um pé atrás, mantendo-o totalmente apoiado no chão</li>
-                                <li>Mantenha a perna de trás estendida</li>
-                                <li>Incline-se para frente até sentir o alongamento</li>
-                                <li>Segure por 30 segundos e repita com a outra perna</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Exercício 4 -->
-                    <div class="exercicio-item" onclick="aqToggleExercicio('estatico4')">
-                        <span class="exercicio-icon">🍑</span>
-                        <span>Alongamento de Glúteos</span>
-                        <span class="duration-badge">30s cada</span>
-                    </div>
-                    <div id="estatico4" class="exercicio-video">
-                        <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
-                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
-                            </div>
-                        </div>
-                        <div class="exercicio-description">
-                            <h4>Como executar:</h4>
-                            <ul>
-                                <li>Deite-se de costas com os joelhos flexionados</li>
-                                <li>Coloque o tornozelo de uma perna sobre o joelho da outra</li>
-                                <li>Puxe a coxa da perna de baixo em direção ao peito</li>
-                                <li>Mantenha a cabeça e ombros relaxados no chão</li>
-                                <li>Segure por 30 segundos e troque de lado</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Exercício 5 -->
-                    <div class="exercicio-item" onclick="aqToggleExercicio('estatico5')">
-                        <span class="exercicio-icon">🧘‍♂️</span>
-                        <span>Alongamento de Flexores do Quadril</span>
-                        <span class="duration-badge">30s cada</span>
-                    </div>
-                    <div id="estatico5" class="exercicio-video">
-                        <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
-                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
-                            </div>
-                        </div>
-                        <div class="exercicio-description">
-                            <h4>Como executar:</h4>
-                            <ul>
-                                <li>Ajoelhe-se com um pé à frente em posição de estocada</li>
-                                <li>Mantenha o joelho da frente alinhado com o tornozelo</li>
-                                <li>Empurre o quadril para frente suavemente</li>
-                                <li>Mantenha o tronco ereto durante o movimento</li>
-                                <li>Segure por 30 segundos e troque de lado</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
+<!-- Exercício 1 -->
+<div class="exercicio-item" onclick="aqToggleExercicio('estatico1')">
+<span class="exercicio-icon">🦵</span>
+<span>Alongamento de Quadríceps</span>
+<span class="duration-badge">30s cada</span>
+</div>
+<div class="exercicio-video" id="estatico1">
+<div class="video-container">
+<div class="video-placeholder">
+<div class="play-icon">▶</div>
+<div>Clique aqui para inserir o vídeo do YouTube</div>
+<div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+</div>
+</div>
+<div class="exercicio-description">
+<h4>Como executar:</h4>
+<ul>
+<li>Fique em pé e apoie-se em uma parede se necessário</li>
+<li>Flexione uma perna para trás, segurando o pé com a mão</li>
+<li>Puxe o calcanhar em direção ao glúteo</li>
+<li>Mantenha os joelhos alinhados</li>
+<li>Segure por 30 segundos e repita do outro lado</li>
+</ul>
+</div>
+</div>
+<!-- Exercício 2 -->
+<div class="exercicio-item" onclick="aqToggleExercicio('estatico2')">
+<span class="exercicio-icon">🦎</span>
+<span>Alongamento de Isquiotibiais</span>
+<span class="duration-badge">30s cada</span>
+</div>
+<div class="exercicio-video" id="estatico2">
+<div class="video-container">
+<div class="video-placeholder">
+<div class="play-icon">▶</div>
+<div>Clique aqui para inserir o vídeo do YouTube</div>
+<div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+</div>
+</div>
+<div class="exercicio-description">
+<h4>Como executar:</h4>
+<ul>
+<li>Sente-se no chão com uma perna estendida</li>
+<li>Flexione a outra perna, apoiando o pé na coxa estendida</li>
+<li>Incline-se para frente sobre a perna estendida</li>
+<li>Mantenha as costas retas durante o alongamento</li>
+<li>Segure por 30 segundos e troque de lado</li>
+</ul>
+</div>
+</div>
+<!-- Exercício 3 -->
+<div class="exercicio-item" onclick="aqToggleExercicio('estatico3')">
+<span class="exercicio-icon">🧘‍♀️</span>
+<span>Alongamento de Panturrilha</span>
+<span class="duration-badge">30s cada</span>
+</div>
+<div class="exercicio-video" id="estatico3">
+<div class="video-container">
+<div class="video-placeholder">
+<div class="play-icon">▶</div>
+<div>Clique aqui para inserir o vídeo do YouTube</div>
+<div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+</div>
+</div>
+<div class="exercicio-description">
+<h4>Como executar:</h4>
+<ul>
+<li>Apoie as mãos em uma parede</li>
+<li>Coloque um pé atrás, mantendo-o totalmente apoiado no chão</li>
+<li>Mantenha a perna de trás estendida</li>
+<li>Incline-se para frente até sentir o alongamento</li>
+<li>Segure por 30 segundos e repita com a outra perna</li>
+</ul>
+</div>
+</div>
+<!-- Exercício 4 -->
+<div class="exercicio-item" onclick="aqToggleExercicio('estatico4')">
+<span class="exercicio-icon">🍑</span>
+<span>Alongamento de Glúteos</span>
+<span class="duration-badge">30s cada</span>
+</div>
+<div class="exercicio-video" id="estatico4">
+<div class="video-container">
+<div class="video-placeholder">
+<div class="play-icon">▶</div>
+<div>Clique aqui para inserir o vídeo do YouTube</div>
+<div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+</div>
+</div>
+<div class="exercicio-description">
+<h4>Como executar:</h4>
+<ul>
+<li>Deite-se de costas com os joelhos flexionados</li>
+<li>Coloque o tornozelo de uma perna sobre o joelho da outra</li>
+<li>Puxe a coxa da perna de baixo em direção ao peito</li>
+<li>Mantenha a cabeça e ombros relaxados no chão</li>
+<li>Segure por 30 segundos e troque de lado</li>
+</ul>
+</div>
+</div>
+<!-- Exercício 5 -->
+<div class="exercicio-item" onclick="aqToggleExercicio('estatico5')">
+<span class="exercicio-icon">🧘‍♂️</span>
+<span>Alongamento de Flexores do Quadril</span>
+<span class="duration-badge">30s cada</span>
+</div>
+<div class="exercicio-video" id="estatico5">
+<div class="video-container">
+<div class="video-placeholder">
+<div class="play-icon">▶</div>
+<div>Clique aqui para inserir o vídeo do YouTube</div>
+<div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+</div>
+</div>
+<div class="exercicio-description">
+<h4>Como executar:</h4>
+<ul>
+<li>Ajoelhe-se com um pé à frente em posição de estocada</li>
+<li>Mantenha o joelho da frente alinhado com o tornozelo</li>
+<li>Empurre o quadril para frente suavemente</li>
+<li>Mantenha o tronco ereto durante o movimento</li>
+<li>Segure por 30 segundos e troque de lado</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
         // Função para alternar entre as abas de aquecimento
         function aqShowTabAquecimento(tabName) {
             // Remove active de todas as abas e conteúdos
@@ -2858,8 +2753,6 @@ function applyNameUI(){
     </script>
 </section>
 <!-- ===== Fim bloco Aquecimentos (anexado) ===== -->
-
-
 <!-- Script do bloco Aquecimentos (namespaced funções) -->
 <script id="aq-script-embed">
 (function(){
