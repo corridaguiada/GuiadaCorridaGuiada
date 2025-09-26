@@ -1088,6 +1088,29 @@ tr:hover {
   object-fit: cover;
 }
 
+
+/* === Video container (corrigido) === */
+.video-container{
+  position:relative;
+  width:100%;
+  max-width:1080px;           /* largura máxima para desktop */
+  margin: 0 auto 1rem;        /* centraliza e dá espaço inferior */
+  background:#000;
+  border-radius:12px;
+  overflow:hidden;
+}
+.video-container::before{
+  content:"";
+  display:block;
+  padding-top:56.25%;         /* 16:9 para 1920x1080 */
+}
+.video-container > video{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:contain;         /* evita corte; mantém horizontal */
+  background:#000;
+}
+
 </style>
 </head>
 <body>
@@ -2553,16 +2576,14 @@ function applyNameUI(){
 <div id="aquecimento1" class="exercicio-video active">
   <div class="video-container">
     <video controls preload="metadata" playsinline aria-label="Aquecimento 1">
-      <source src="assets/videos/aquecimento/Aquecimento1.mp4" type="video/mp4" />
+      <source src="aquecimento/Aquecimento1.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo HTML5.
     </video>
   </div>
 </div>
 
                         <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                            <div></div>
                                 <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
                             </div>
                             <!-- Substitua pela URL do seu vídeo:
@@ -2591,16 +2612,14 @@ function applyNameUI(){
 <div id="aquecimento2" class="exercicio-video active">
   <div class="video-container">
     <video controls preload="metadata" playsinline aria-label="Aquecimento 2">
-      <source src="assets/videos/aquecimento/Aquecimento2.mp4" type="video/mp4" />
+      <source src="aquecimento/Aquecimento2.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo HTML5.
     </video>
   </div>
 </div>
 
                         <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                            <div></div>
                                 <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
                             </div>
                         </div>
@@ -2626,16 +2645,14 @@ function applyNameUI(){
 <div id="aquecimento3" class="exercicio-video active">
   <div class="video-container">
     <video controls preload="metadata" playsinline aria-label="Aquecimento 3">
-      <source src="assets/videos/aquecimento/Aquecimento3.mp4" type="video/mp4" />
+      <source src="aquecimento/Aquecimento3.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo HTML5.
     </video>
   </div>
 </div>
 
                         <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                            <div></div>
                                 <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
                             </div>
                         </div>
@@ -2660,16 +2677,14 @@ function applyNameUI(){
 <div id="aquecimento4" class="exercicio-video active">
   <div class="video-container">
     <video controls preload="metadata" playsinline aria-label="Aquecimento 4">
-      <source src="assets/videos/aquecimento/Aquecimento4.mp4" type="video/mp4" />
+      <source src="aquecimento/Aquecimento4.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo HTML5.
     </video>
   </div>
 </div>
 
                         <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                            <div></div>
                                 <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
                             </div>
                         </div>
@@ -2693,16 +2708,14 @@ function applyNameUI(){
 <div id="aquecimento3" class="exercicio-video active">
   <div class="video-container">
     <video controls preload="metadata" playsinline aria-label="Aquecimento 3">
-      <source src="assets/videos/aquecimento/Aquecimento3.mp4" type="video/mp4" />
+      <source src="aquecimento/Aquecimento3.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo HTML5.
     </video>
   </div>
 </div>
 
                                             <div class="video-container">
-                                                <div class="video-placeholder">
-                                                    <div class="play-icon">▶</div>
-                                                    <div>Clique aqui para inserir o vídeo do YouTube</div>
+                                                <div></div>
                                                     <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
                                                 </div>
                                             </div>
@@ -2738,16 +2751,14 @@ function applyNameUI(){
 <div id="alongamento1" class="exercicio-video active">
   <div class="video-container">
     <video controls preload="metadata" playsinline aria-label="Alongamento 1">
-      <source src="assets/videos/alongamento/Alongamento1.mp4" type="video/mp4" />
+      <source src="alongamento/Alongamento1.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo HTML5.
     </video>
   </div>
 </div>
 
                         <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                            <div></div>
                                 <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
                             </div>
                         </div>
@@ -2773,16 +2784,14 @@ function applyNameUI(){
 <div id="alongamento2" class="exercicio-video active">
   <div class="video-container">
     <video controls preload="metadata" playsinline aria-label="Alongamento 2">
-      <source src="assets/videos/alongamento/Alongamento2.mp4" type="video/mp4" />
+      <source src="alongamento/Alongamento2.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo HTML5.
     </video>
   </div>
 </div>
 
                         <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                            <div></div>
                                 <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
                             </div>
                         </div>
@@ -2808,16 +2817,14 @@ function applyNameUI(){
 <div id="alongamento3" class="exercicio-video active">
   <div class="video-container">
     <video controls preload="metadata" playsinline aria-label="Alongamento 3">
-      <source src="assets/videos/alongamento/Alongamento3.mp4" type="video/mp4" />
+      <source src="alongamento/Alongamento3.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo HTML5.
     </video>
   </div>
 </div>
 
                         <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                            <div></div>
                                 <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
                             </div>
                         </div>
@@ -2843,16 +2850,14 @@ function applyNameUI(){
 <div id="alongamento4" class="exercicio-video active">
   <div class="video-container">
     <video controls preload="metadata" playsinline aria-label="Alongamento 4">
-      <source src="assets/videos/alongamento/Alongamento4.mp4" type="video/mp4" />
+      <source src="alongamento/Alongamento4.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo HTML5.
     </video>
   </div>
 </div>
 
                         <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                            <div></div>
                                 <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
                             </div>
                         </div>
@@ -2878,16 +2883,14 @@ function applyNameUI(){
 <div id="alongamento5" class="exercicio-video active">
   <div class="video-container">
     <video controls preload="metadata" playsinline aria-label="Alongamento 5">
-      <source src="assets/videos/alongamento/Alongamento5.mp4" type="video/mp4" />
+      <source src="alongamento/Alongamento5.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo HTML5.
     </video>
   </div>
 </div>
 
                         <div class="video-container">
-                            <div class="video-placeholder">
-                                <div class="play-icon">▶</div>
-                                <div>Clique aqui para inserir o vídeo do YouTube</div>
+                            <div></div>
                                 <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
                             </div>
                         </div>
