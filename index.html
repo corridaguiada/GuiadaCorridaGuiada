@@ -1113,84 +1113,53 @@ tr:hover {
 
 </style>
 
-<style id="fix-final-2025-09">
-/* Vídeo: mostrar completo (sem corte), respeitar 16:9 e não ficar gigante */
-.video-container{
-  position:relative;
-  width:100% !important;
-  max-width:1080px !important;
-  margin:0 auto 1rem !important;
-  background:transparent !important;
-  border-radius:12px;
-  overflow:hidden;
-}
-.video-container::before{
-  content:"";
-  display:block;
-  padding-top:56.25%;
-}
-.video-container > video,
-.video-container > iframe{
-  position:absolute; inset:0;
-  width:100%; height:100%;
-  object-fit:contain !important;   /* sem corte; mostra tudo */
-  background:transparent !important;
-}
-
-/* Esconde placeholders e containers vazios */
-.video-placeholder{ display:none !important; }
-.video-container:empty{ display:none !important; }
-
-/* Itens e badges não devem "escapar" do layout */
-.exercicio-item, .section h3, .exercicio-description, .duration-badge{
-  position:relative;
-}
-
-/* Painéis de vídeo/descrição começam fechados por padrão; abrimos via .active */
-.exercicio-video, .exercicio-description{
-  display:none;
-}
-.exercicio-video.active, .exercicio-description.active{
-  display:block;
-}
-</style>
 
 
-<style id="fix-hard-video-and-tabs">
-/* --- VIDEO: mostrar inteiro (sem corte), respeitar tamanho/proporção natural --- */
+
+
+
+
+<style id="final-video-tabs-override">
+/* === VIDEO: mostrar COMPLETO, sem cortes, seguindo o tamanho natural === */
 .video-container{
   position: relative !important;
   width: 100% !important;
-  max-width: 1080px !important;
+  max-width: 1080px !important;   /* não fica gigante */
   margin: 0 auto 1rem !important;
   background: transparent !important;
   border-radius: 12px;
   overflow: hidden;
-  padding: 0 !important;         /* remove padding imposto por pseudo-elemento */
+  height: auto !important;         /* desfaz height:0 */
+  padding: 0 !important;           /* desfaz paddings para 16:9 */
 }
-/* anula o "truque" do 16:9 */
 .video-container::before{ content: none !important; display: none !important; }
-/* o vídeo volta ao fluxo normal para usar altura automática */
 .video-container > video, .video-container > iframe{
   position: static !important;
   display: block !important;
   width: 100% !important;
-  height: auto !important;      /* respeita a proporção natural */
-  object-fit: contain !important;
+  height: auto !important;         /* respeita proporção do arquivo */
+  object-fit: contain !important;  /* mostra o vídeo inteiro */
   background: transparent !important;
 }
 
-/* Remove qualquer placeholder/bloco vazio que cria "faixas" */
+/* Evita blocos pretos sobressalentes */
 .video-placeholder{ display:none !important; }
-.video-container:empty{ display:none !important; }
 
-/* Painéis começam fechados; abrimos com .active */
-.exercicio-video, .exercicio-description{ display:none; }
-.exercicio-video.active, .exercicio-description.active{ display:block; }
+/* Painéis colapsáveis: começam fechados; abrimos via .active */
+.exercicio-video, .exercicio-description{ display: none; }
+.exercicio-video.active, .exercicio-description.active{ display: block; }
 
-/* Garante alinhamento do conteúdo geral */
-.container{ max-width:1200px; margin:0 auto; padding:20px; }
-.content{ width:100%; }
+/* Alinhamento global: remove padding acidental do <body> de estilos embutidos */
+body{ padding: 0 !important; }
+.container{ margin: 0 auto !important; }
+
+/* Conteúdos de tabs: somente o ativo aparece */
+.tab-content{ display: none; }
+.tab-content.active{ display: block; }
+
+/* Conteúdos de tabs locais (aquecimento/alongamento) */
+.tab-content-aquecimento{ display: none; }
+.tab-content-aquecimento.active{ display: block; }
 </style>
 
 </head>
@@ -3093,154 +3062,51 @@ function applyNameUI(){
 })();
 </script>
 
-<script id="tabs-main-fix-2025-09">
+
+
+
+
+
+
+
+
+
+<script id="final-tabs-toggles-js">
 (function(){
   function initMainTabs(){
     document.querySelectorAll('.tabs').forEach(function(tabsEl){
-      var buttons = tabsEl.querySelectorAll('.tab');
-      // o container de conteúdos costuma vir logo após .tabs
+      var buttons = Array.from(tabsEl.querySelectorAll('.tab'));
+      // o content correto é o próximo .content logo após a barra de tabs
       var contentWrap = tabsEl.nextElementSibling;
-      if (!contentWrap || !contentWrap.classList.contains('content')){
-        // fallback: usa o primeiro .content da página
-        contentWrap = document.querySelector('.content');
-      }
-      if (!contentWrap) return;
-      var panes = contentWrap.querySelectorAll('.tab-content');
+      if (!contentWrap || !contentWrap.classList.contains('content')) return;
+      var panes = Array.from(contentWrap.querySelectorAll('.tab-content'));
       function activate(i){
-        buttons.forEach((b,idx)=> b.classList.toggle('active', idx===i));
-        panes.forEach((p,idx)=> p.classList.toggle('active', idx===i));
+        buttons.forEach(function(b,idx){ b.classList.toggle('active', idx===i); });
+        panes.forEach(function(p,idx){ p.classList.toggle('active', idx===i); });
       }
       buttons.forEach(function(btn, idx){
         if (btn.dataset.bound === "1") return;
         btn.dataset.bound = "1";
         btn.addEventListener('click', function(){ activate(idx); });
       });
-      // Estado inicial: se nenhum ativo, ativa o primeiro
-      var initial = 0;
-      buttons.forEach((b,i)=>{ if (b.classList.contains('active')) initial = i; });
-      activate(initial);
+      // Estado inicial seguro
+      var initial = buttons.findIndex(b => b.classList.contains('active'));
+      activate(initial >= 0 ? initial : 0);
     });
-  }
-  if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', initMainTabs);
-  } else {
-    initMainTabs();
-  }
-})();
-</script>
-
-
-<script id="exercise-toggles-fix-2025-09">
-(function(){
-  function toggleSection(header){
-    header.classList.toggle('active');
-    var el = header.nextElementSibling;
-    while (el){
-      if (el.classList && (el.classList.contains('exercicio-item') || el.tagName === 'H3')) break;
-      if (el.classList && (el.classList.contains('exercicio-video') || el.classList.contains('exercicio-description') || el.classList.contains('expandable'))){
-        el.classList.toggle('active');
-      }
-      el = el.nextElementSibling;
-    }
   }
 
   function initExerciseToggles(){
-    document.querySelectorAll('.exercicio-item, .section h3').forEach(function(h){
+    // clicar no item do exercício alterna vídeo e descrição subsequentes
+    document.querySelectorAll('.exercicio-item').forEach(function(h){
       if (h.dataset.bound === "1") return;
       h.dataset.bound = "1";
-      h.style.cursor = 'pointer';
-      h.addEventListener('click', function(){ toggleSection(h); });
-    });
-  }
-
-  function initLocalAqTabs(){
-    document.querySelectorAll('.tabs-aquecimento').forEach(function(tabs){
-      var btns = tabs.querySelectorAll('.tab-aquecimento');
-      var content = tabs.nextElementSibling;
-      if (!content || !content.classList.contains('content-aquecimento')) return;
-      var panes = content.querySelectorAll('.tab-content-aquecimento');
-      function activate(i){
-        btns.forEach((b,idx)=> b.classList.toggle('active', idx===i));
-        panes.forEach((p,idx)=> p.classList.toggle('active', idx===i));
-      }
-      btns.forEach(function(b, idx){
-        if (b.dataset.bound === "1") return;
-        b.dataset.bound = "1";
-        b.addEventListener('click', function(){ activate(idx); });
-      });
-      var initial = 0;
-      btns.forEach((b,i)=>{ if (b.classList.contains('active')) initial = i; });
-      activate(initial);
-    });
-  }
-
-  function initAll(){
-    initExerciseToggles();
-    initLocalAqTabs();
-  }
-
-  if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', initAll);
-  } else {
-    initAll();
-  }
-})();
-</script>
-
-
-<script id="fix-js-tabs-toggles">
-(function(){
-  // Tabs principais (usa data-target se existir; senão mapeia por índice)
-  function initMainTabs(){
-    document.querySelectorAll('.tabs').forEach(function(tabsEl){
-      var buttons = tabsEl.querySelectorAll('.tab');
-      var contentWrap = tabsEl.nextElementSibling;
-      if (!contentWrap || !contentWrap.classList.contains('content')){
-        contentWrap = document.querySelector('.content');
-      }
-      if (!contentWrap) return;
-      var panes = contentWrap.querySelectorAll('.tab-content');
-
-      function activateByIndex(i){
-        buttons.forEach((b,idx)=> b.classList.toggle('active', idx===i));
-        panes.forEach((p,idx)=> p.classList.toggle('active', idx===i));
-      }
-
-      function activateById(id){
-        buttons.forEach((b)=> b.classList.toggle('active', b.dataset.target === id));
-        panes.forEach((p)=> p.classList.toggle('active', '#'+p.id === id));
-      }
-
-      buttons.forEach(function(btn, idx){
-        if (btn.dataset.bound === '1') return;
-        btn.dataset.bound = '1';
-        btn.style.cursor = 'pointer';
-        btn.addEventListener('click', function(){
-          var tgt = btn.dataset.target;
-          if (tgt && contentWrap.querySelector(tgt)) activateById(tgt);
-          else activateByIndex(idx);
-        });
-      });
-
-      // Estado inicial seguro
-      var activeIdx = 0;
-      buttons.forEach((b,i)=>{ if (b.classList.contains('active')) activeIdx = i; });
-      activateByIndex(activeIdx);
-    });
-  }
-
-  // Toggle por exercício: clicar no título alterna vídeo + descrição até o próximo header
-  function initExerciseToggles(){
-    document.querySelectorAll('.exercicio-item, .section h3').forEach(function(h){
-      if (h.dataset.bound === '1') return;
-      h.dataset.bound = '1';
       h.style.cursor = 'pointer';
       h.addEventListener('click', function(){
         h.classList.toggle('active');
         var el = h.nextElementSibling;
         while (el){
-          if (el.classList && (el.classList.contains('exercicio-item') || el.tagName === 'H3')) break;
-          if (el.classList && (el.classList.contains('exercicio-video') || el.classList.contains('exercicio-description') || el.classList.contains('expandable'))){
+          if (el.classList && el.classList.contains('exercicio-item')) break;
+          if (el.classList && (el.classList.contains('exercicio-video') || el.classList.contains('exercicio-description'))){
             el.classList.toggle('active');
           }
           el = el.nextElementSibling;
@@ -3249,15 +3115,32 @@ function applyNameUI(){
     });
   }
 
-  if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', function(){
-      initMainTabs();
-      initExerciseToggles();
+  function initLocalAquecimentoTabs(){
+    document.querySelectorAll('.tabs-aquecimento').forEach(function(tabs){
+      var buttons = Array.from(tabs.querySelectorAll('.tab-aquecimento'));
+      var content = tabs.nextElementSibling;
+      if (!content || !content.classList.contains('content-aquecimento')) return;
+      var panes = Array.from(content.querySelectorAll('.tab-content-aquecimento'));
+      function activate(i){
+        buttons.forEach(function(b,idx){ b.classList.toggle('active', idx===i); });
+        panes.forEach(function(p,idx){ p.classList.toggle('active', idx===i); });
+      }
+      buttons.forEach(function(btn, idx){
+        if (btn.dataset.bound === "1") return;
+        btn.dataset.bound = "1";
+        btn.addEventListener('click', function(){ activate(idx); });
+      });
+      var initial = buttons.findIndex(b => b.classList.contains('active'));
+      activate(initial >= 0 ? initial : 0);
     });
-  } else {
+  }
+
+  function init(){
     initMainTabs();
     initExerciseToggles();
+    initLocalAquecimentoTabs();
   }
+  if (document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', init); } else { init(); }
 })();
 </script>
 
