@@ -1070,6 +1070,24 @@ tr:hover {
             }
         }
 
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.video-container > video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 </style>
 </head>
 <body>
@@ -2528,39 +2546,57 @@ function applyNameUI(){
                     <!-- Exercício 1 -->
                     <div class="exercicio-item" onclick="aqToggleExercicio('dinamico1')">
                         <span class="exercicio-icon">🦵</span>
-                        <span>Elevação de Joelhos (High Knees)</span>
-                        <span class="duration-badge">30s</span>
+                        <span>Chute Frontal</span>
+                        <span class="duration-badge">10x cada perna</span>
                     </div>
-                    <div id="dinamico1" class="exercicio-video">
+                    
+<div id="aquecimento1" class="exercicio-video active">
+  <div class="video-container">
+    <video controls preload="metadata" playsinline aria-label="Aquecimento 1">
+      <source src="assets/videos/aquecimento/Aquecimento1.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+</div>
+
                         <div class="video-container">
                             <div class="video-placeholder">
                                 <div class="play-icon">▶</div>
                                 <div>Clique aqui para inserir o vídeo do YouTube</div>
                                 <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
                             </div>
-                            <!-- Substitua pela URL do seu vídeo:-->
-                            <iframe src="https://www.youtube.com/watch?v=Zpb3CliVxw4" frameborder="0" allowfullscreen></iframe>
-                            
+                            <!-- Substitua pela URL do seu vídeo:
+                            <iframe src="https://www.youtube.com/seuvideo" frameborder="0" allowfullscreen></iframe>
+                            -->
                         </div>
                         <div class="exercicio-description">
                             <h4>Como executar:</h4>
                             <ul>
                                 <li>Mantenha o corpo ereto e olhar para frente</li>
-                                <li>Eleve alternadamente os joelhos até a altura do quadril</li>
-                                <li>Mantenha um ritmo constante e controlado</li>
-                                <li>Use os braços para manter o equilíbrio</li>
-                                <li>Execute por 30 segundos</li>
+                                <li>Eleve a perna reta até a altura do quadril</li>
+                                <li>Toque sua mão oposta na ponta do pé ou chegue o mais proximo que der</li>
+                                <li>Se precisar use os braços para manter o equilíbrio</li>
+                                <li>Execute 10 repetições para cada perna</li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Exercício 2 -->
                     <div class="exercicio-item" onclick="aqToggleExercicio('dinamico2')">
-                        <span class="exercicio-icon">🍑</span>
-                        <span>Calcanhares ao Glúteo (Butt Kicks)</span>
-                        <span class="duration-badge">30s</span>
+                        <span class="exercicio-icon">🦵</span>
+                        <span>Chute Lateral</span>
+                        <span class="duration-badge">10x cada perna</span>
                     </div>
-                    <div id="dinamico2" class="exercicio-video">
+                    
+<div id="aquecimento2" class="exercicio-video active">
+  <div class="video-container">
+    <video controls preload="metadata" playsinline aria-label="Aquecimento 2">
+      <source src="assets/videos/aquecimento/Aquecimento2.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+</div>
+
                         <div class="video-container">
                             <div class="video-placeholder">
                                 <div class="play-icon">▶</div>
@@ -2571,11 +2607,11 @@ function applyNameUI(){
                         <div class="exercicio-description">
                             <h4>Como executar:</h4>
                             <ul>
-                                <li>Mantenha o corpo ereto com abdômen contraído</li>
-                                <li>Flexione alternadamente os joelhos, levando o calcanhar ao glúteo</li>
-                                <li>Mantenha as coxas paralelas ao chão</li>
+                                <li>Mantenha o corpo ereto e olhar para frente</li>
+                                <li>Com a perna reta, realize o movimento onde uma das pernas vai ao maximo para direita e volta indo ao maximo para esquerda</li>
+                                <li>Se precisar use os braços para se apoiar</li>
                                 <li>Execute com ritmo constante</li>
-                                <li>Continue por 30 segundos</li>
+                                <li>Execute 10 repetições para cada perna</li>
                             </ul>
                         </div>
                     </div>
@@ -2583,10 +2619,19 @@ function applyNameUI(){
                     <!-- Exercício 3 -->
                     <div class="exercicio-item" onclick="aqToggleExercicio('dinamico3')">
                         <span class="exercicio-icon">🔄</span>
-                        <span>Rotações de Quadril</span>
+                        <span>Agachamento Rotacional</span>
                         <span class="duration-badge">10x cada lado</span>
                     </div>
-                    <div id="dinamico3" class="exercicio-video">
+                    
+<div id="aquecimento3" class="exercicio-video active">
+  <div class="video-container">
+    <video controls preload="metadata" playsinline aria-label="Aquecimento 3">
+      <source src="assets/videos/aquecimento/Aquecimento3.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+</div>
+
                         <div class="video-container">
                             <div class="video-placeholder">
                                 <div class="play-icon">▶</div>
@@ -2597,10 +2642,9 @@ function applyNameUI(){
                         <div class="exercicio-description">
                             <h4>Como executar:</h4>
                             <ul>
-                                <li>Apoie-se em uma parede ou objeto fixo</li>
-                                <li>Eleve uma perna e faça círculos amplos com o quadril</li>
-                                <li>Execute 10 rotações para frente e 10 para trás</li>
-                                <li>Repita com a outra perna</li>
+                                <li>Agache e apoia as mãos em seus pés</li>
+                                <li>Importante fazer força na parte lateral dos pés e não tirar o calcanhar do chão</li>
+                                <li>Execute 10 rotações para cada lado</li>
                                 <li>Mantenha o movimento controlado e fluido</li>
                             </ul>
                         </div>
@@ -2609,10 +2653,19 @@ function applyNameUI(){
                     <!-- Exercício 4 -->
                     <div class="exercicio-item" onclick="aqToggleExercicio('dinamico4')">
                         <span class="exercicio-icon">🕺</span>
-                        <span>Passadas Laterais (Lateral Lunges)</span>
+                        <span>Meio espacate + 10x batida em cada perna </span>
                         <span class="duration-badge">10x cada lado</span>
                     </div>
-                    <div id="dinamico4" class="exercicio-video">
+                    
+<div id="aquecimento4" class="exercicio-video active">
+  <div class="video-container">
+    <video controls preload="metadata" playsinline aria-label="Aquecimento 4">
+      <source src="assets/videos/aquecimento/Aquecimento4.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+</div>
+
                         <div class="video-container">
                             <div class="video-placeholder">
                                 <div class="play-icon">▶</div>
@@ -2623,14 +2676,47 @@ function applyNameUI(){
                         <div class="exercicio-description">
                             <h4>Como executar:</h4>
                             <ul>
-                                <li>Comece em posição ereta, pés paralelos</li>
-                                <li>Dê um passo largo para o lado, flexionando o joelho</li>
-                                <li>Mantenha a outra perna estendida</li>
-                                <li>Retorne à posição inicial e repita do outro lado</li>
+                                <li>Distancie os pés, formando um meio espacate</li>
+                                <li>Depois, alternando as mãos bata no pé oposto ou próximo</li>
                                 <li>Execute 10 repetições para cada lado</li>
                             </ul>
                         </div>
                     </div>
+
+                                        <!-- Exercício 5 -->
+                                        <div class="exercicio-item" onclick="aqToggleExercicio('dinamico3')">
+                                            <span class="exercicio-icon">🔄</span>
+                                            <span>Passada Frontal</span>
+                                            <span class="duration-badge">10x cada perna</span>
+                                        </div>
+                                        
+<div id="aquecimento3" class="exercicio-video active">
+  <div class="video-container">
+    <video controls preload="metadata" playsinline aria-label="Aquecimento 3">
+      <source src="assets/videos/aquecimento/Aquecimento3.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+</div>
+
+                                            <div class="video-container">
+                                                <div class="video-placeholder">
+                                                    <div class="play-icon">▶</div>
+                                                    <div>Clique aqui para inserir o vídeo do YouTube</div>
+                                                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">Cole a URL do vídeo no código</div>
+                                                </div>
+                                            </div>
+                                            <div class="exercicio-description">
+                                                <h4>Como executar:</h4>
+                                                <ul>
+                                                    <li>Leve uma perna a frente, e a outra dobre levemente</li>
+                                                    <li>Se incline, e com as mãos paralelas passe o mais proximo que conseguir dos pés a frente</li>
+                                                    <li>Execute 10 vezes para cada perna</li>
+                                                    
+                                                    <li>Mantenha o movimento controlado e fluido</li>
+                                                </ul>
+                                            </div>
+                                        </div>
                 </div>
             </div>
 
@@ -2648,7 +2734,16 @@ function applyNameUI(){
                         <span>Alongamento de Quadríceps</span>
                         <span class="duration-badge">30s cada</span>
                     </div>
-                    <div id="estatico1" class="exercicio-video">
+                    
+<div id="alongamento1" class="exercicio-video active">
+  <div class="video-container">
+    <video controls preload="metadata" playsinline aria-label="Alongamento 1">
+      <source src="assets/videos/alongamento/Alongamento1.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+</div>
+
                         <div class="video-container">
                             <div class="video-placeholder">
                                 <div class="play-icon">▶</div>
@@ -2674,7 +2769,16 @@ function applyNameUI(){
                         <span>Alongamento de Isquiotibiais</span>
                         <span class="duration-badge">30s cada</span>
                     </div>
-                    <div id="estatico2" class="exercicio-video">
+                    
+<div id="alongamento2" class="exercicio-video active">
+  <div class="video-container">
+    <video controls preload="metadata" playsinline aria-label="Alongamento 2">
+      <source src="assets/videos/alongamento/Alongamento2.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+</div>
+
                         <div class="video-container">
                             <div class="video-placeholder">
                                 <div class="play-icon">▶</div>
@@ -2700,7 +2804,16 @@ function applyNameUI(){
                         <span>Alongamento de Panturrilha</span>
                         <span class="duration-badge">30s cada</span>
                     </div>
-                    <div id="estatico3" class="exercicio-video">
+                    
+<div id="alongamento3" class="exercicio-video active">
+  <div class="video-container">
+    <video controls preload="metadata" playsinline aria-label="Alongamento 3">
+      <source src="assets/videos/alongamento/Alongamento3.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+</div>
+
                         <div class="video-container">
                             <div class="video-placeholder">
                                 <div class="play-icon">▶</div>
@@ -2726,7 +2839,16 @@ function applyNameUI(){
                         <span>Alongamento de Glúteos</span>
                         <span class="duration-badge">30s cada</span>
                     </div>
-                    <div id="estatico4" class="exercicio-video">
+                    
+<div id="alongamento4" class="exercicio-video active">
+  <div class="video-container">
+    <video controls preload="metadata" playsinline aria-label="Alongamento 4">
+      <source src="assets/videos/alongamento/Alongamento4.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+</div>
+
                         <div class="video-container">
                             <div class="video-placeholder">
                                 <div class="play-icon">▶</div>
@@ -2752,7 +2874,16 @@ function applyNameUI(){
                         <span>Alongamento de Flexores do Quadril</span>
                         <span class="duration-badge">30s cada</span>
                     </div>
-                    <div id="estatico5" class="exercicio-video">
+                    
+<div id="alongamento5" class="exercicio-video active">
+  <div class="video-container">
+    <video controls preload="metadata" playsinline aria-label="Alongamento 5">
+      <source src="assets/videos/alongamento/Alongamento5.mp4" type="video/mp4" />
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+</div>
+
                         <div class="video-container">
                             <div class="video-placeholder">
                                 <div class="play-icon">▶</div>
