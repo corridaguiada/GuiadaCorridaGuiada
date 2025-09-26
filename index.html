@@ -831,7 +831,7 @@ tr:hover {
             line-height: 1.6;
             color: #333;
             background-color: #f8f9fa;
-            padding: 20px;
+            padding: 0;
         }
 
         .aquecimentos-container {
@@ -1160,6 +1160,22 @@ body{ padding: 0 !important; }
 /* Conteúdos de tabs locais (aquecimento/alongamento) */
 .tab-content-aquecimento{ display: none; }
 .tab-content-aquecimento.active{ display: block; }
+</style>
+
+
+<style id="fix-tabs-align-assertive">
+/* Mantém títulos alinhados e largura total */
+.aquecimentos-container, .content, .section, .section-aquecimento{ width:100%; }
+.exercicio-item{ display:flex; align-items:center; gap:1rem; width:100%; }
+.duration-badge{ margin-left:auto; }
+
+/* Vídeos e descrições fechados por padrão */
+.exercicio-video, .exercicio-description{ display:none; }
+.exercicio-video.active, .exercicio-description.active{ display:block; }
+
+/* Garante que apenas o conteúdo ativo das tabs apareça */
+.tab-content, .tab-content-aquecimento{ display:none; }
+.tab-content.active, .tab-content-aquecimento.active{ display:block; }
 </style>
 
 </head>
@@ -3141,6 +3157,81 @@ function applyNameUI(){
     initLocalAquecimentoTabs();
   }
   if (document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', init); } else { init(); }
+})();
+</script>
+
+
+<script id="fix-tabs-aq-toggle-assertive">
+(function(){
+  // Tabs principais (barra .tabs -> .content/.tab-content logo em seguida)
+  function initMainTabs(){
+    document.querySelectorAll('.tabs').forEach(function(tabsEl){
+      const buttons = Array.from(tabsEl.querySelectorAll('.tab'));
+      const contentWrap = tabsEl.nextElementSibling;
+      if (!contentWrap || !contentWrap.classList.contains('content')) return;
+      const panes = Array.from(contentWrap.querySelectorAll('.tab-content'));
+      function activate(i){
+        buttons.forEach((b,idx)=> b.classList.toggle('active', idx===i));
+        panes.forEach((p,idx)=> p.classList.toggle('active', idx===i));
+      }
+      buttons.forEach((btn, idx)=>{
+        if (btn.dataset.bound === "1") return;
+        btn.dataset.bound = "1";
+        btn.addEventListener('click', ()=> activate(idx));
+      });
+      const initial = Math.max(0, buttons.findIndex(b=>b.classList.contains('active')));
+      activate(initial);
+    });
+  }
+
+  // Tabs internas do bloco de aquecimentos/alongamentos (em "Aquecimentos e Alongamentos")
+  function initAqTabs(){
+    document.querySelectorAll('.tabs-aquecimento').forEach(function(tabs){
+      const buttons = Array.from(tabs.querySelectorAll('.tab-aquecimento'));
+      const contentWrap = tabs.nextElementSibling;
+      if (!contentWrap || !contentWrap.classList.contains('content-aquecimento')) return;
+      const panes = Array.from(contentWrap.querySelectorAll('.tab-content-aquecimento'));
+      function activate(i){
+        buttons.forEach((b,idx)=> b.classList.toggle('active', idx===i));
+        panes.forEach((p,idx)=> p.classList.toggle('active', idx===i));
+      }
+      buttons.forEach((btn, idx)=>{
+        if (btn.dataset.bound === "1") return;
+        btn.dataset.bound = "1";
+        btn.addEventListener('click', ()=> activate(idx));
+      });
+      const initial = Math.max(0, buttons.findIndex(b=>b.classList.contains('active')));
+      activate(initial);
+    });
+  }
+
+  // Clique no nome do exercício -> alterna VÍDEO + DESCRIÇÃO daquele exercício
+  function initExerciseToggles(){
+    document.querySelectorAll('.exercicio-item').forEach(function(h){
+      if (h.dataset.bound === "1") return;
+      h.dataset.bound = "1";
+      h.style.cursor = 'pointer';
+      h.addEventListener('click', function(){
+        h.classList.toggle('active');
+        let el = h.nextElementSibling;
+        while (el){
+          if (el.classList && el.classList.contains('exercicio-item')) break;
+          if (el.classList && (el.classList.contains('exercicio-video') || el.classList.contains('exercicio-description'))){
+            el.classList.toggle('active');
+          }
+          el = el.nextElementSibling;
+        }
+      });
+    });
+  }
+
+  function initAll(){
+    initMainTabs();
+    initAqTabs();
+    initExerciseToggles();
+  }
+  if (document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', initAll); }
+  else { initAll(); }
 })();
 </script>
 
