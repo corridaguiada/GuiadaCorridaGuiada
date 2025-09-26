@@ -1113,38 +1113,45 @@ tr:hover {
 
 </style>
 
-<style id="fix-videos-only">
-/* === Correções solicitadas (mínimas) === */
-/* Remove bordas pretas e mantém 16:9, ocupando o container sem sobras */
-.video-container {
-  position: relative;
-  width: 100%;
-  max-width: 1080px;
-  margin: 0 auto 1rem;
-  background: transparent !important; /* sem fundo preto */
-  border-radius: 12px;
-  overflow: hidden;
+<style id="fix-final-2025-09">
+/* Vídeo: mostrar completo (sem corte), respeitar 16:9 e não ficar gigante */
+.video-container{
+  position:relative;
+  width:100% !important;
+  max-width:1080px !important;
+  margin:0 auto 1rem !important;
+  background:transparent !important;
+  border-radius:12px;
+  overflow:hidden;
 }
-.video-container::before {
-  content: "";
-  display: block;
-  padding-top: 56.25%; /* 16:9 */
+.video-container::before{
+  content:"";
+  display:block;
+  padding-top:56.25%;
 }
-.video-container > video, .video-container > iframe {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover !important; /* preenche sem barras pretas */
-  background: transparent !important;
-}
-
-/* Garantir que textos de títulos e badges não "fujam" para as laterais */
-.exercicio-item, .section h3, .exercicio-description, .duration-badge {
-  position: relative;
+.video-container > video,
+.video-container > iframe{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:contain !important;   /* sem corte; mostra tudo */
+  background:transparent !important;
 }
 
-/* Oculta qualquer container de vídeo vazio (bloco preto sem mídia) */
-.video-container:has(> :not(video):not(iframe)) {
-  display: none;
+/* Esconde placeholders e containers vazios */
+.video-placeholder{ display:none !important; }
+.video-container:empty{ display:none !important; }
+
+/* Itens e badges não devem "escapar" do layout */
+.exercicio-item, .section h3, .exercicio-description, .duration-badge{
+  position:relative;
+}
+
+/* Painéis de vídeo/descrição começam fechados por padrão; abrimos via .active */
+.exercicio-video, .exercicio-description{
+  display:none;
+}
+.exercicio-video.active, .exercicio-description.active{
+  display:block;
 }
 </style>
 
@@ -3048,26 +3055,96 @@ function applyNameUI(){
 })();
 </script>
 
-<script id="toggle-video-fix">
-// Reativa toggle: clicar no título/linha do exercício alterna o vídeo abaixo
+<script id="tabs-main-fix-2025-09">
 (function(){
-  function bindToggles(){
-    document.querySelectorAll('.exercicio-item, .section h3').forEach(function(el){
-      el.addEventListener('click', function(){
-        el.classList.toggle('active');
-        var pane = el.nextElementSibling;
-        if (pane && pane.classList.contains('exercicio-video')){
-          pane.classList.toggle('active');
-        } else if (pane && pane.classList.contains('expandable')){
-          pane.classList.toggle('active');
-        }
+  function initMainTabs(){
+    document.querySelectorAll('.tabs').forEach(function(tabsEl){
+      var buttons = tabsEl.querySelectorAll('.tab');
+      // o container de conteúdos costuma vir logo após .tabs
+      var contentWrap = tabsEl.nextElementSibling;
+      if (!contentWrap || !contentWrap.classList.contains('content')){
+        // fallback: usa o primeiro .content da página
+        contentWrap = document.querySelector('.content');
+      }
+      if (!contentWrap) return;
+      var panes = contentWrap.querySelectorAll('.tab-content');
+      function activate(i){
+        buttons.forEach((b,idx)=> b.classList.toggle('active', idx===i));
+        panes.forEach((p,idx)=> p.classList.toggle('active', idx===i));
+      }
+      buttons.forEach(function(btn, idx){
+        if (btn.dataset.bound === "1") return;
+        btn.dataset.bound = "1";
+        btn.addEventListener('click', function(){ activate(idx); });
       });
+      // Estado inicial: se nenhum ativo, ativa o primeiro
+      var initial = 0;
+      buttons.forEach((b,i)=>{ if (b.classList.contains('active')) initial = i; });
+      activate(initial);
     });
   }
   if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', bindToggles);
+    document.addEventListener('DOMContentLoaded', initMainTabs);
   } else {
-    bindToggles();
+    initMainTabs();
+  }
+})();
+</script>
+
+
+<script id="exercise-toggles-fix-2025-09">
+(function(){
+  function toggleSection(header){
+    header.classList.toggle('active');
+    var el = header.nextElementSibling;
+    while (el){
+      if (el.classList && (el.classList.contains('exercicio-item') || el.tagName === 'H3')) break;
+      if (el.classList && (el.classList.contains('exercicio-video') || el.classList.contains('exercicio-description') || el.classList.contains('expandable'))){
+        el.classList.toggle('active');
+      }
+      el = el.nextElementSibling;
+    }
+  }
+
+  function initExerciseToggles(){
+    document.querySelectorAll('.exercicio-item, .section h3').forEach(function(h){
+      if (h.dataset.bound === "1") return;
+      h.dataset.bound = "1";
+      h.style.cursor = 'pointer';
+      h.addEventListener('click', function(){ toggleSection(h); });
+    });
+  }
+
+  function initLocalAqTabs(){
+    document.querySelectorAll('.tabs-aquecimento').forEach(function(tabs){
+      var btns = tabs.querySelectorAll('.tab-aquecimento');
+      var content = tabs.nextElementSibling;
+      if (!content || !content.classList.contains('content-aquecimento')) return;
+      var panes = content.querySelectorAll('.tab-content-aquecimento');
+      function activate(i){
+        btns.forEach((b,idx)=> b.classList.toggle('active', idx===i));
+        panes.forEach((p,idx)=> p.classList.toggle('active', idx===i));
+      }
+      btns.forEach(function(b, idx){
+        if (b.dataset.bound === "1") return;
+        b.dataset.bound = "1";
+        b.addEventListener('click', function(){ activate(idx); });
+      });
+      var initial = 0;
+      btns.forEach((b,i)=>{ if (b.classList.contains('active')) initial = i; });
+      activate(initial);
+    });
+  }
+
+  function initAll(){
+    initExerciseToggles();
+    initLocalAqTabs();
+  }
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
   }
 })();
 </script>
