@@ -1155,6 +1155,44 @@ tr:hover {
 }
 </style>
 
+
+<style id="fix-hard-video-and-tabs">
+/* --- VIDEO: mostrar inteiro (sem corte), respeitar tamanho/proporção natural --- */
+.video-container{
+  position: relative !important;
+  width: 100% !important;
+  max-width: 1080px !important;
+  margin: 0 auto 1rem !important;
+  background: transparent !important;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 0 !important;         /* remove padding imposto por pseudo-elemento */
+}
+/* anula o "truque" do 16:9 */
+.video-container::before{ content: none !important; display: none !important; }
+/* o vídeo volta ao fluxo normal para usar altura automática */
+.video-container > video, .video-container > iframe{
+  position: static !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;      /* respeita a proporção natural */
+  object-fit: contain !important;
+  background: transparent !important;
+}
+
+/* Remove qualquer placeholder/bloco vazio que cria "faixas" */
+.video-placeholder{ display:none !important; }
+.video-container:empty{ display:none !important; }
+
+/* Painéis começam fechados; abrimos com .active */
+.exercicio-video, .exercicio-description{ display:none; }
+.exercicio-video.active, .exercicio-description.active{ display:block; }
+
+/* Garante alinhamento do conteúdo geral */
+.container{ max-width:1200px; margin:0 auto; padding:20px; }
+.content{ width:100%; }
+</style>
+
 </head>
 <body>
 <div class="container">
@@ -3145,6 +3183,80 @@ function applyNameUI(){
     document.addEventListener('DOMContentLoaded', initAll);
   } else {
     initAll();
+  }
+})();
+</script>
+
+
+<script id="fix-js-tabs-toggles">
+(function(){
+  // Tabs principais (usa data-target se existir; senão mapeia por índice)
+  function initMainTabs(){
+    document.querySelectorAll('.tabs').forEach(function(tabsEl){
+      var buttons = tabsEl.querySelectorAll('.tab');
+      var contentWrap = tabsEl.nextElementSibling;
+      if (!contentWrap || !contentWrap.classList.contains('content')){
+        contentWrap = document.querySelector('.content');
+      }
+      if (!contentWrap) return;
+      var panes = contentWrap.querySelectorAll('.tab-content');
+
+      function activateByIndex(i){
+        buttons.forEach((b,idx)=> b.classList.toggle('active', idx===i));
+        panes.forEach((p,idx)=> p.classList.toggle('active', idx===i));
+      }
+
+      function activateById(id){
+        buttons.forEach((b)=> b.classList.toggle('active', b.dataset.target === id));
+        panes.forEach((p)=> p.classList.toggle('active', '#'+p.id === id));
+      }
+
+      buttons.forEach(function(btn, idx){
+        if (btn.dataset.bound === '1') return;
+        btn.dataset.bound = '1';
+        btn.style.cursor = 'pointer';
+        btn.addEventListener('click', function(){
+          var tgt = btn.dataset.target;
+          if (tgt && contentWrap.querySelector(tgt)) activateById(tgt);
+          else activateByIndex(idx);
+        });
+      });
+
+      // Estado inicial seguro
+      var activeIdx = 0;
+      buttons.forEach((b,i)=>{ if (b.classList.contains('active')) activeIdx = i; });
+      activateByIndex(activeIdx);
+    });
+  }
+
+  // Toggle por exercício: clicar no título alterna vídeo + descrição até o próximo header
+  function initExerciseToggles(){
+    document.querySelectorAll('.exercicio-item, .section h3').forEach(function(h){
+      if (h.dataset.bound === '1') return;
+      h.dataset.bound = '1';
+      h.style.cursor = 'pointer';
+      h.addEventListener('click', function(){
+        h.classList.toggle('active');
+        var el = h.nextElementSibling;
+        while (el){
+          if (el.classList && (el.classList.contains('exercicio-item') || el.tagName === 'H3')) break;
+          if (el.classList && (el.classList.contains('exercicio-video') || el.classList.contains('exercicio-description') || el.classList.contains('expandable'))){
+            el.classList.toggle('active');
+          }
+          el = el.nextElementSibling;
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){
+      initMainTabs();
+      initExerciseToggles();
+    });
+  } else {
+    initMainTabs();
+    initExerciseToggles();
   }
 })();
 </script>
